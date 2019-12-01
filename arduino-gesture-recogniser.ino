@@ -1,5 +1,11 @@
-#include <Wire.h>
+/**
+ * Demonstration of PAJ7620 Gesture Recogniser module
+ */
 
+// INCLUDES
+// Arduino Wire library is for communicating with any I2C device
+#include <Wire.h>
+// PAJ7620 library, based on datasheet as described at 
 // https://www.epsglobal.com/Media-Library/EPSGlobal/Products/files/pixart/PAJ7620F2.pdf?ext=.pdf
 #include "src/PAJ7620/paj7620.h"
 
@@ -23,7 +29,7 @@ void loop() {
 	byte gesture;
   // Error variable holds any error code
 	int error;
-  // Read Reg 0x43 of Bank 0 to get result of any recognised gesture, and store in 'data' variable
+  // Read Reg 0x43 of Bank 0 to get result of any recognised gesture, and store in 'gesture' variable
 	error = paj7620ReadReg(0x43, 1, &gesture);
  
 	if(!error) {
@@ -55,6 +61,6 @@ void loop() {
     Serial.print(F("Error code: "));
     Serial.println(error);
  }
- 
+  // Introduce small delay before next polling the sensor 
   delay(100);
 }
